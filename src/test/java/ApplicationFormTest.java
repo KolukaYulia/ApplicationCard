@@ -18,12 +18,12 @@ public class ApplicationFormTest {
     private WebDriver driver;
 
     @BeforeAll
-    static void setupAll() {
+    static void setUpAll() {
         WebDriverManager.chromedriver().setup();
     }
 
     @BeforeEach
-    void setup() {
+    void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         options.addArguments("disable-infobars");
@@ -39,14 +39,15 @@ public class ApplicationFormTest {
     }
 
     @AfterEach
-    void teardown() {
+    void tearDown() {
         driver.quit();
+        driver = null;
     }
 
     @Test
     void applicationFormTest() {
         driver.get("http://localhost:9999/");
-        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("иванов иван");
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Петров Петр");
         driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79211234567");
         driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.cssSelector("button")).click();
